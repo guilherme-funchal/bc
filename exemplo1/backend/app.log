@@ -1,0 +1,26 @@
+Servidor rodando http://openbadges.serpro.gov.br:3002/
+Executing (default): SELECT `id`, `username`, `email`, `type`, `image`, `pass_hash`, `pass_salt`, `created_at`, `updated_at`, `last_login`, `entity_id`, `level`, `domain`, `client_secret`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `users` AS `User` WHERE `User`.`entity_id` = 's22Sqekyt7jbeAFTS6kcUy' LIMIT 1;
+Executing (default): SELECT `id`, `username`, `email`, `type`, `image`, `pass_hash`, `pass_salt`, `created_at`, `updated_at`, `last_login`, `entity_id`, `level`, `domain`, `client_secret`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `users` AS `User` WHERE `User`.`entity_id` = '4rcnLk2cLHzcvWUdMtw5Ui' LIMIT 1;
+entityId-> s22Sqekyt7jbeAFTS6kcUy
+Executing (default): SELECT `id`, `username`, `email`, `type`, `image`, `pass_hash`, `pass_salt`, `created_at`, `updated_at`, `last_login`, `entity_id`, `level`, `domain`, `client_secret`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `users` AS `User` WHERE `User`.`entity_id` = 'whiNXB949gucQJibs6V84S' LIMIT 1;
+entityId-> s22Sqekyt7jbeAFTS6kcUy
+Executing (default): SELECT `id`, `username`, `email`, `type`, `image`, `pass_hash`, `pass_salt`, `created_at`, `updated_at`, `last_login`, `entity_id`, `level`, `domain`, `client_secret`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `users` AS `User` WHERE `User`.`entity_id` = 'qKr8rfada8VMAiYiqGiVKL' LIMIT 1;
+entityId-> s22Sqekyt7jbeAFTS6kcUy
+Executing (default): SELECT `id`, `username`, `email`, `type`, `image`, `pass_hash`, `pass_salt`, `created_at`, `updated_at`, `last_login`, `entity_id`, `level`, `domain`, `client_secret`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `users` AS `User` WHERE `User`.`entity_id` = '2rppb5GzBvENe5kS5614Di' LIMIT 1;
+entityId-> s22Sqekyt7jbeAFTS6kcUy
+Executing (default): SELECT `id`, `username`, `email`, `type`, `image`, `pass_hash`, `pass_salt`, `created_at`, `updated_at`, `last_login`, `entity_id`, `level`, `domain`, `client_secret`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `users` AS `User` WHERE `User`.`entity_id` = '2rppb5GzBvENe5kS5614Di' LIMIT 1;
+entityId-> s22Sqekyt7jbeAFTS6kcUy
+Executing (default): SELECT `id`, `username`, `email`, `type`, `image`, `pass_hash`, `pass_salt`, `created_at`, `updated_at`, `last_login`, `entity_id`, `level`, `domain`, `client_secret`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `users` AS `User` WHERE `User`.`entity_id` = '2XF1y3fn7L7UTWB1hKK74U' LIMIT 1;
+entityId-> s22Sqekyt7jbeAFTS6kcUy
+Executing (default): SELECT `id`, `username`, `email`, `type`, `image`, `pass_hash`, `pass_salt`, `created_at`, `updated_at`, `last_login`, `entity_id`, `level`, `domain`, `client_secret`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `users` AS `User` WHERE `User`.`entity_id` = '4rcnLk2cLHzcvWUdMtw5Ui' LIMIT 1;
+entityId-> s22Sqekyt7jbeAFTS6kcUy
+Executing (default): SELECT `id`, `username`, `email`, `type`, `image`, `pass_hash`, `pass_salt`, `created_at`, `updated_at`, `last_login`, `entity_id`, `level`, `domain`, `client_secret`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `users` AS `User` WHERE `User`.`entity_id` = 'whiNXB949gucQJibs6V84S' LIMIT 1;
+entityId-> s22Sqekyt7jbeAFTS6kcUy
+Executing (default): SELECT `id`, `username`, `email`, `type`, `image`, `pass_hash`, `pass_salt`, `created_at`, `updated_at`, `last_login`, `entity_id`, `level`, `domain`, `client_secret`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `users` AS `User` WHERE `User`.`entity_id` = 'qKr8rfada8VMAiYiqGiVKL' LIMIT 1;
+entityId-> s22Sqekyt7jbeAFTS6kcUy
+Executing (default): SELECT `id`, `username`, `email`, `type`, `image`, `pass_hash`, `pass_salt`, `created_at`, `updated_at`, `last_login`, `entity_id`, `level`, `domain`, `client_secret`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `users` AS `User` WHERE `User`.`entity_id` = '2rppb5GzBvENe5kS5614Di' LIMIT 1;
+entityId-> s22Sqekyt7jbeAFTS6kcUy
+Executing (default): SELECT `id`, `username`, `email`, `type`, `image`, `pass_hash`, `pass_salt`, `created_at`, `updated_at`, `last_login`, `entity_id`, `level`, `domain`, `client_secret`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `users` AS `User` WHERE `User`.`entity_id` = '2rppb5GzBvENe5kS5614Di' LIMIT 1;
+entityId-> s22Sqekyt7jbeAFTS6kcUy
+Executing (default): SELECT `id`, `username`, `email`, `type`, `image`, `pass_hash`, `pass_salt`, `created_at`, `updated_at`, `last_login`, `entity_id`, `level`, `domain`, `client_secret`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `users` AS `User` WHERE `User`.`entity_id` = '2XF1y3fn7L7UTWB1hKK74U' LIMIT 1;
+entityId-> s22Sqekyt7jbeAFTS6kcUy
