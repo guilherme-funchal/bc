@@ -73,3 +73,5 @@ ADDRESS_BC = "http://127.0.0.1:8545"
 npm start
 ```
 
+## 5) Teste
+No diretório backend/insomnia deixei uma exportação para uso no Insomnia para testar as APIs
