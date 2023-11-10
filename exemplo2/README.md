@@ -72,4 +72,3 @@ ADDRESS_BC = "http://127.0.0.1:8545"
 ```
 npm start
 ```
-
