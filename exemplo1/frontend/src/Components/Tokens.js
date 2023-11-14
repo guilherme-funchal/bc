@@ -66,13 +66,98 @@ export default function Tokens() {
         })
         if (confirma === true){
             var  block = {
-                "account": destino.trim(),
+                "to": destino.trim(),
                 "value": valor.trim()
             };
-            Api.post('sacar', block);
+
+
+            const result = Api.post('sacar', block);
             navigate("/Tokens");
             navigate(0);
         }
+    }
+
+    // const inputOptions = new Promise((resolve) => {
+    //     setTimeout(() => {
+    //       resolve({
+    //         '0': 'Moeda',  
+    //         '1': 'Carbono'
+            
+    //       })
+    //     }, 1000)
+    //   })
+
+    async function doTransfer() {
+
+
+        const steps = ['1', '2', '3', '4']
+        const Queue = await Swal.mixin({
+            progressSteps: steps,
+            confirmButtonText: 'Próximo >',
+            showClass: { backdrop: 'swal2-noanimation' },
+            hideClass: { backdrop: 'swal2-noanimation' }
+        })
+        const { value: origem } = await Queue.fire({
+            title: 'Origem da transferência',
+            currentProgressStep: 0,
+            showClass: { backdrop: 'swal2-noanimation' },
+            input: 'text',
+            inputLabel: '',
+            inputPlaceholder: 'User ID'
+        })
+        const { value: destino } = await Queue.fire({
+            title: 'Destino da transferência',
+            currentProgressStep: 1,
+            input: 'text',
+            inputLabel: '',
+            inputPlaceholder: 'User ID'
+        })
+        const { value: valor } = await Queue.fire({
+            title: 'Valor da transferência',
+            currentProgressStep: 2,
+            input: 'number',
+            inputLabel: '',
+            inputPlaceholder: 'Valor'
+        })
+        const { value: confirma } = await Queue.fire({
+            title: 'Confirma transação',
+            currentProgressStep: 3,
+            confirmButtonText: 'Sim',
+            showCancelButton: true,
+            cancelButtonText: 'Não',
+            showClass: { backdrop: 'swal2-noanimation' },
+        })
+        if (confirma === true){
+            var block = { 
+                "from": origem,
+                "to": destino,
+                "value": valor
+             };
+            
+            var saldo = await Api.get('saldo/' + origem); 
+
+            
+            if (saldo.data > valor){
+                Api.post('transferir', block);
+                navigate("/Tokens");
+                navigate(0);
+            } else {
+                Swal.fire({
+                    title: 'Não existe saldo suficiente',
+                    icon: 'error',
+                    showDenyButton: false,
+                    showCancelButton: false,
+                    confirmButtonText: 'Ok',
+                    denyButtonText: 'Não',
+                    customClass: {
+                      actions: 'my-actions',
+                      cancelButton: 'order-1 right-gap',
+                      confirmButton: 'order-2',
+                      denyButton: 'order-3',
+                    }
+                })
+            }
+        }            
     }
 
     async function doTokem() {
@@ -120,7 +205,7 @@ export default function Tokens() {
 
         if (confirma === true){
             var block = {
-                "account": destino.trim(),
+                "to": destino.trim(),
                 "amount": valor.trim()
             };
             Api.post('depositar', block);
@@ -186,6 +271,9 @@ export default function Tokens() {
                         <Button  style={style} variant="danger" size="sm"  onClick={burnTokem}>
                         <i class="fas fa-fire"></i> Sacar
                         </Button>
+                        <Button  style={style} variant="success" size="sm"  onClick={doTransfer}>
+                        <i class="nav-icon ion ion-cash"></i> Transferir
+                        </Button>
                         <div style={{ "font-size": "15px" }} class="table-responsive">
                         <table className="blueTable">
                         {/* <table class="table-sm table-striped table-bordered  w-100 d-block d-md-table"> */}
@@ -202,7 +290,7 @@ export default function Tokens() {
                             <tbody>
                                 {transactions.map((obj) => {
 
-                                    var visible = true;
+                                    var visible = false;
 
                                     const val = obj.returnValues;
                                     let from = "";
@@ -214,42 +302,37 @@ export default function Tokens() {
                                     for (const key in val) {
                                         if (key === "from") {
                                             from = `${val[key]}`;
-                                            if (from === "0x0000000000000000000000000000000000000000" && obj.event === "TransferSingle") {
+                                            if (from === "0x0000000000000000000000000000000000000000" && obj.event === "Transfer") {
                                                 transferencia = "Depositar";
                                                 visible = false;
                                             }
                                         }
                                         else if (key === "to") {
                                             to = `${val[key]}`;
-                                            if (to === "0x0000000000000000000000000000000000000000" && obj.event === "TransferSingle") {
+                                            if (to === "0x0000000000000000000000000000000000000000" && obj.event === "Transfer") {
                                                 transferencia = "Sacar";
                                                 visible = false;
                                             }
                                         }
-                                        // else if (key === "id") {
-                                        //     id = `${val[key]}`;
-                                        //     if (id === "1") {
-                                        //         id = "Carbono";
-                                        //     } else {
-                                        //         id = "Moeda";
-                                        //     }
-                                        // }
                                         else if (key === "value") {
                                             value = `${val[key]}`;
                                             value = Web3.utils.fromWei(value, 'ether');
                                             value = parseFloat(value);
                                         }
                                     }
+                                    if (obj.blockNumber == 1) {
+                                        visible = true;
+                                    }
 
                                     return (
                                         visible ? null
                                         :(
-                                                <tr style={{ cursor: "pointer" }}>
+                                                <tr>
                                                     <td key={transferencia} ><center>{transferencia}</center></td>
                                                     <td key={obj.blockNumber}><center>{obj.blockNumber}</center></td>
-                                                    <td key={from} onClick={() => viewUser(from)}><center>{from}</center></td>
+                                                    <td key={from}><center>{from}</center></td>
 
-                                                    <td key={to}  onClick={() => viewUser(to)}><center>{to}</center></td>
+                                                    <td key={to}><center>{to}</center></td>
                                                     <td key={value}><center>{value.toLocaleString('pt-br', { minimumFractionDigits: 2 })}</center></td>
                                                     <td key="button"><center><button className="btn text-red btn-sm" onClick={event => { doTimestamp(obj.blockNumber); }}
                                                     ><i className="fa fa-clock fa-fw" style={{ fontSize: "15px" }}></i></button></center></td>

@@ -50,6 +50,20 @@ module.exports = {
             console.error(e)
         }
     },
+    async carimbo(req, res) {
+        try {
+            let bloco = req.body.block;
+            var web3 = new Web3(process.env.ADDRESS_BC);
+            var contratoInteligente = new web3.eth.Contract(CONTACT_ABI.CONTACT_ABI, CONTACT_ADDRESS.CONTACT_ADDRESS);
+            let block = await web3.eth.getBlock(bloco);
+            let timestamp = block.timestamp;
+            console.log(timestamp);
+            var date = new Date(timestamp * 1000);
+            res.status(200).send(`${timestamp}`);
+          } catch (e) {
+            console.error(e)
+          }
+    },
     async account(req, res) {
         try {
             const user_id = req.params.user_id
@@ -130,8 +144,9 @@ module.exports = {
     async sacar(req, res) {
         try {
             let to = req.body.to;
-            let amount = req.body.amount;
-            amount = Web3.utils.toWei(amount, 'ether');
+            let value = req.body.value;
+
+            value = Web3.utils.toWei(value, 'ether');
 
             const web3 = new Web3(
                 new Web3.providers.HttpProvider(
@@ -144,7 +159,8 @@ module.exports = {
             web3.eth.accounts.wallet.add(signer);
             var contratoInteligente = new web3.eth.Contract(CONTACT_ABI.CONTACT_ABI, CONTACT_ADDRESS.CONTACT_ADDRESS);
 
-            const tx = contratoInteligente.methods.burn(to, amount);
+            const tx = contratoInteligente.methods.sacar(to, value);
+
             const receipt = await tx
                 .send({
                     from: signer.address,

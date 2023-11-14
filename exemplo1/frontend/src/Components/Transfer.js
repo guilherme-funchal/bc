@@ -192,7 +192,6 @@ export default function Transfer() {
                                     <th class="bg-primary"><center>Origem</center></th>
                                     <th class="bg-primary"><center>Destino</center></th>
                                     <th class="bg-primary"><center>Valor</center></th>
-                                    <th class="bg-primary"><center>Tipo</center></th>
                                     <th class="bg-primary"><center>Timestamp</center></th>
                                 </tr>
                             </thead>
@@ -228,14 +227,14 @@ export default function Transfer() {
                                             }
                                             
                                         }
-                                        else if (key === "id") {
-                                            id = `${val[key]}`;
-                                            if (id === "1") {
-                                                id = "Carbono";
-                                            } else {
-                                                id = "Moeda";
-                                            }
-                                        }
+                                        // else if (key === "id") {
+                                        //     id = `${val[key]}`;
+                                        //     if (id === "1") {
+                                        //         id = "Carbono";
+                                        //     } else {
+                                        //         id = "Moeda";
+                                        //     }
+                                        // }
                                         else if (key === "value") {
                                             value = `${val[key]}`;
                                             value = Web3.utils.fromWei(value, 'ether');
@@ -246,6 +245,10 @@ export default function Transfer() {
                                         from = "Smart contract"
                                     }
 
+                                    if (obj.blockNumber == 1) {
+                                        visible = true;
+                                    }
+                                    
                                     if (user[0]?.user_id === to || user[0]?.user_id === from){
                                         if (transferencia === "Transferir") 
                                         {
@@ -263,7 +266,6 @@ export default function Transfer() {
 
                                                     <td onClick={() => viewUser(to)}><center>{to}</center></td>
                                                     <td><center>{value.toLocaleString('pt-br', { minimumFractionDigits: 2 })}</center></td>
-                                                    <td><center>{id}</center></td>
                                                     <td><center><button className="btn text-red btn-sm" onClick={event => { doTimestamp(obj.blockNumber); }}
                                                     ><i className="fa fa-clock fa-fw" style={{ fontSize: "15px" }}></i></button></center></td>
                                                 </tr>

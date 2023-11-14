@@ -118,20 +118,10 @@ export default function Sidenav() {
                                     <Link to="/Tokens" className="nav-link">
                                         <i className="nav-icon ion ion-cash" />
                                         <p>
-                                            Tokens
+                                            Operações
                                         </p>
                                     </Link>
                                 </li> 
-                            }
-                            { transf === true &&
-                                <li className="nav-item">
-                                    <Link to="/Transfer" className="nav-link">
-                                        <i className="nav-icon fas fa  fa-arrows-alt" />
-                                        <p>
-                                            Transferências
-                                        </p>
-                                    </Link>
-                                </li>
                             }
                             {administracao === true &&
 

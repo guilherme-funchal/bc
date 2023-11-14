@@ -1,7 +1,7 @@
 
 const CONTACT_ADDRESS = '0x5FbDB2315678afecb367f032d93F642f64180aa3'; 
 
-const CONTACT_ABI = [
+const CONTACT_ABI =  [
 	{
 		"inputs": [
 			{
@@ -255,6 +255,24 @@ const CONTACT_ABI = [
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "sacar",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{

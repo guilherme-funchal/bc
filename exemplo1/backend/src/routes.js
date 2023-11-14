@@ -7,6 +7,7 @@ const router = Router()
 router.get('/saldo/:conta', TesteController.saldo);
 router.get('/transacoes', TesteController.transacoes);
 router.post('/depositar', TesteController.depositar);
+router.post('/carimbo', TesteController.carimbo);
 router.post('/sacar', TesteController.sacar);
 router.post('/transferir', TesteController.transferir);
 router.get('/account/find/:user_id', TesteController.account);

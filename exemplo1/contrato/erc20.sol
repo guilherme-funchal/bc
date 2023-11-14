@@ -15,6 +15,10 @@ contract Serpro is ERC20, Ownable {
         _mint(to, amount);
     }
 
+    function sacar(address to, uint256 value) public onlyOwner {
+        _burn(to, value);
+    }
+
     function transferirValor(address from, address to, uint256 value) public onlyOwner  {
         _transfer(from, to, value);
     }

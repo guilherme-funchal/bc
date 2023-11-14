@@ -10,7 +10,6 @@ import React, { useState, useEffect } from 'react';
 export default function Projetos() {
     const getTransactions = async () => {
         const response = await Api.get('transacoes');
-        console.log("response->", response.data)
         setTransactions(response.data);
     };
 
@@ -28,13 +27,8 @@ export default function Projetos() {
     const [transactions, setTransactions] = useState([]);
     const [moeda, setMoeda] = useState([]);
     var transferir = 0;
-    var aposentar = 0;
-    var cunhar = 0;
     var total = 0;
-    var valor_carbono = 0;
-    var valor_moeda = 0;
-    var valor_transf_moeda = 0;
-    var valor_transf_carbono = 0;
+
 
     async function doTimestamp(param) {
         const block = { block: param };
@@ -73,8 +67,6 @@ export default function Projetos() {
         if (address !== null) {
             setUser(JSON.parse(address));
             getTransactions();
-            // getTaxas();
-            // getUsers();
             getSaldos(JSON.parse(address));
         } else {
             setUser(false);
@@ -117,7 +109,7 @@ export default function Projetos() {
 
 
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">Transações</h3>
@@ -134,7 +126,7 @@ export default function Projetos() {
                                                     <th class="bg-primary"><center>Origem</center></th>
                                                     <th class="bg-primary"><center>Destino</center></th>
                                                     <th class="bg-primary"><center>Valor</center></th>
-                                                    <th class="bg-primary"><center>Tipo</center></th>
+
                                                     <th class="bg-primary"><center>Timestamp</center></th>
                                                 </tr>
                                             </thead>
@@ -152,14 +144,14 @@ export default function Projetos() {
                                                     for (const key in val) {
                                                         if (key === "from") {
                                                             from = `${val[key]}`;
-                                                            if (from === "0x0000000000000000000000000000000000000000" && obj.event === "TransferSingle") {
-                                                                transferencia = "Cunhar";
+                                                            if (from === "0x0000000000000000000000000000000000000000" && obj.event === "Transfer") {
+                                                                transferencia = "Depositar";
                                                             }
                                                         }
                                                         if (key === "to") {
                                                             to = `${val[key]}`;
-                                                            if (to === "0x0000000000000000000000000000000000000000" && obj.event === "TransferSingle") {
-                                                                transferencia = "Aposentar";
+                                                            if (to === "0x0000000000000000000000000000000000000000" && obj.event === "TransferS") {
+                                                                transferencia = "Sacar";
                                                             }
                                                         }
                                                         else if (key === "id") {
@@ -183,42 +175,19 @@ export default function Projetos() {
                                                         visible = false;
                                                     }
 
-                                                    if ((transferencia === 'Cunhar') && (user[0]?.profile === "certificador" || user[0]?.profile === "registrador" || user[0]?.user_id === to || user[0]?.user_id === from)) {
-                                                        cunhar = cunhar + 1;
-                                                        if (id === "Carbono") {
-                                                            valor_carbono = valor_carbono + value;
-                                                            valor_carbono = parseFloat(valor_carbono);
-                                                        } else {
-                                                            valor_moeda = valor_moeda + value;
-                                                            valor_moeda = parseFloat(valor_moeda);
-                                                        }
-                                                    }
-
-                                                    if ((transferencia === 'Transferir') && (user[0]?.profile === "certificador" || user[0]?.profile === "registrador" || user[0]?.user_id === to || user[0]?.user_id === from)) {
-                                                        transferir = transferir + 1;
-                                                        if (id === "Carbono") {
-                                                            valor_transf_carbono = valor_transf_carbono + value;
-                                                            valor_transf_carbono = parseFloat(valor_transf_carbono);
-                                                        } else {
-                                                            valor_transf_moeda = valor_transf_moeda + value;
-                                                            valor_transf_moeda = parseFloat(valor_transf_moeda);
-                                                        }
-                                                    }
-
-                                                    if ((transferencia === 'Aposentar') && (user[0]?.profile === "certificador" || user[0]?.profile === "registrador" || user[0]?.user_id === to || user[0]?.user_id === from)) {
-                                                        aposentar = aposentar + 1;
+                                                    if (obj.blockNumber == 1) {
+                                                        visible = true;
                                                     }
 
                                                     return (
                                                         visible ? null
                                                             : (
-                                                                <tr style={{ cursor: "pointer" }}>
-                                                                    <td key={transferencia}><center>{transferencia}</center></td>
-                                                                    <td key={obj.blockNumber}><center>{obj.blockNumber}</center></td>
-                                                                    <td key={from} onClick={() => viewUser(from)}><center>{from}</center></td>
-                                                                    <td key={to} onClick={() => viewUser(to)}><center>{to}</center></td>
-                                                                    <td key={value}><center>{value.toLocaleString('pt-br', { minimumFractionDigits: 2 })}</center></td>
-                                                                    <td key={id}><center>{id}</center></td>
+                                                                <tr>
+                                                                    <td><center>{transferencia}</center></td>
+                                                                    <td><center>{obj.blockNumber}</center></td>
+                                                                    <td><center>{from}</center></td>
+                                                                    <td><center>{to}</center></td>
+                                                                    <td><center>{value.toLocaleString('pt-br', { minimumFractionDigits: 2 })}</center></td>
                                                                     <td><center><button className="btn text-red btn-sm" onClick={event => { doTimestamp(obj.blockNumber); }}
                                                                     ><i className="fa fa-clock fa-fw" style={{ fontSize: "15px" }}></i></button></center></td>
                                                                 </tr>
