@@ -25,23 +25,10 @@ export default function Sidenav() {
     let token = false;
     let transf = false;
 
-    if (user[0]?.profile === 'certificador' || user[0]?.profile === 'comprador') {
-        plataforma = true;
-    }
-
-    if (user[0]?.profile === 'registrador' || user[0]?.profile === 'certificador' || user[0]?.profile === 'propositor' || user[0]?.profile === 'comprador'){
+    if (user[0]?.profile === 'banco' || user[0]?.profile === 'usuario') {
         dashboard = true;
-    }
-
-    if (user[0]?.profile === 'registrador' || user[0]?.profile === 'certificador' || user[0]?.profile === 'propositor') {
         projetos = true;
-    }
-
-    if (user[0]?.profile === 'registrador') {
         administracao = true;
-    }
-
-    if (user[0]?.profile === 'registrador' || user[0]?.profile === 'certificador') {
         token = true;
         transf = true;
     }

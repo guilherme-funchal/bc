@@ -4,10 +4,32 @@ const Web3 = require('web3');
 const dotenv = require('dotenv');
 const cors = require('cors');
 dotenv.config();
-
+const jsonFileList = './user-list.json'
+const fs = require('fs');
+const jsonFile = './data.json'
 require("dotenv").config();
 
 module.exports = {
+    async account(req, res) {
+        try {
+            const user_id = req.params.user_id
+            var result = [];
+            const jsonData = fs.readFileSync(jsonFile)
+            const userList = JSON.parse(jsonData)
+
+            for (var i = 0; i < userList.length; i++) {
+                if (userList[i]["user_id"] == user_id) {
+                    result.push(userList[i]);
+                }
+            }
+
+            // res.send(account)
+            res.status(200).send(JSON.stringify(userList));
+
+        } catch (e) {
+            console.error(e)
+        }
+    },
     async listar(req, res) {
         try {
             var web3 = new Web3(process.env.ADDRESS_BC);
@@ -73,9 +95,9 @@ module.exports = {
             var contratoInteligente = new web3.eth.Contract(CONTACT_ABI.CONTACT_ABI, CONTACT_ADDRESS.CONTACT_ADDRESS);
 
             const tx = contratoInteligente.methods.setPessoa(
-               nome,
-               email,
-               cpf
+                nome,
+                email,
+                cpf
             )
 
             const receipt = await tx
@@ -216,5 +238,5 @@ module.exports = {
             console.error(e)
         }
     },
-    
+
 }
